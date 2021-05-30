@@ -16,6 +16,8 @@ scipy
 imutils
 seaborn
 wordcloud
+dill
+argparse
 # Werkzeug
 # pandas
 # opencv-python
