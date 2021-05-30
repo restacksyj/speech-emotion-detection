@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr" style="height: 100%;">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400&display=swap" rel="stylesheet">
+    <title>Speech Emotion</title>
+    <script type="text/javascript" src="/static/js/audio_wave.js"></script>
+  </head>
+  <body style="height: 100%;">
+    {% block body %}
+    <div
+      style="
+        background-image: url('/static/CSS/images/bg.jpeg');
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      "
+    >
+      <!--
+        Interview question
+         -->
+      <br />
+
+      <p style="font-size: 60px; margin-top: 120px;margin-bottom: 20px;">
+        Speech Emotion Detection
+      </p>
+      <p style="margin-bottom: 100px;font-size: 20px;font-weight: 200;">
+        Analysis of your emotion using Speech. Understand yourself!
+      </p>
+      <!-- <blockquote>
+        <p class="quotation">
+          Tell us about the last time you showed leadership.
+        </p>
+      </blockquote> -->
+
+      <!--
+        Audio recording button
+        -->
+      <br />
+      <form action="/audio_recording" method="post">
+        <input
+         id="mainbtn"
+        type="submit" name="audio_recording" value="Start Recording" style="border-radius: 10px;color:white;background:#343B3F"/>
+      </form>
+
+      <div style="margin: 25px"></div>
+
+      <audio controls autoplay >
+        <source src="{{audio}}" type="audio/wav" />
+
+        Your browser does not support the audio element.
+      </audio>
+
+      <p id="recording" style="color: red;"></p>
+      <!-- <button onclick="onPlay()">Play me</button> -->
+      <!--
+        Flash Messages
+        -->
+      <br />
+      <br />
+      <br />
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+      message in messages %}
+      <div class="Won">
+        <span
+          class="closebtn"
+          onclick="this.parentElement.style.display='none';"
+          >&times;</span
+        >
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+      <br />
+      <br />
+
+      <!--
+        Emotion analysis button
+        -->
+      {% if display_button == True %}
+      <form action="/audio_dash" method="get">
+        <input
+
+          style="background:rgba(184,222,255,1.0);color: black;"
+          type="submit"
+          name="audio_analysis"
+          value="Get Emotion Analysis"
+        />
+      </form>
+      {% endif %} {% endblock %}
+
+      <!--
+    Rules
+    -->
+     
+      <!-- <form>
+        <input type="button" value="Back" onclick="history.go(-1)" />
+      </form> -->
+
+      <br />
+    </div>
+
+    <!--
+     Audio image header
+      -->
+    <!-- <a href="/">
+        <img src = "/static/CSS/images/audio_head.png" width="100%">
+      </a> -->
+  </body>
+  <script></script>
+</html>

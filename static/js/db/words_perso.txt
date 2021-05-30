@@ -1,0 +1,7 @@
+WORDS,FREQ
+im,1
+pretty,1
+hardworking,1
+happy,1
+work,1
+around,1

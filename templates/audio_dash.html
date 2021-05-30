@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr" style="height:100%">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" type="text/css" href="/static/CSS/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="/static/js/d3/d3.js"></script>
+  <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+  <title>Dashboard</title>
+
+</head>
+
+<body style="height: 100%;">
+
+
+
+  <!-- <br>
+  <br> -->
+
+
+  {% block body %}
+  <div style="
+        background-image: url('/static/CSS/images/bg.jpeg');
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      ">
+
+    <br />
+
+    <!-- <p style="font-size: 60px; margin-top: 120px;margin-bottom: 20px;">
+        Speech Emotion Detection
+      </p>
+      <p style="margin-bottom: 100px;font-size: 20px;font-weight: 200;">
+        Analysis of your emotion using Speech. Understand yourself!
+      </p> -->
+    <div>
+      <p style="margin-bottom: 10px;font-size: 40px;margin-top: 100px;">
+        Perceived Emotions
+      </p>
+      <p style="margin-bottom: 80px;font-size: 20px;font-weight: 200;">
+        Your most frequent emotion is: <span style="font-weight:400;">{{emo}}</span> 
+      </p>
+
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;text-align: center;align-content: center;justify-content: center;">
+      <div style="padding: 30px;background-color:rgba(184,222,255,1.0);border-radius: 10px;margin-right: 15px;">
+        <p style="font-size: 60px;">
+          😠
+        </p>
+        <p style="font-size: 20px;">Anger</p>
+
+        <p style="font-size: 20px;">
+          {{prob[0]}}%
+        </p>
+      </div>
+      <div style="padding: 30px;background-color:rgba(184,222,255,1.0);border-radius: 10px;margin-right: 15px;">
+        <p style="font-size: 60px;">
+          😩
+        </p>
+        <p style="font-size: 20px;">Disgust</p>
+
+        <p style="font-size: 20px;">
+          {{prob[1]}}%
+        </p>
+      </div>
+      <div style="padding: 30px;background-color:rgba(184,222,255,1.0);border-radius: 10px;margin-right: 15px;">
+        <p style="font-size: 60px;">
+          😨
+        </p>
+        <p style="font-size: 20px;">Fear</p>
+
+        <p style="font-size: 20px;">
+          {{prob[2]}}%
+        </p>
+
+      </div>
+      <div style="padding: 30px;background-color:rgba(184,222,255,1.0);border-radius: 10px;margin-right: 15px;">
+        <p style="font-size: 60px;">
+          😁
+        </p>
+        <p style="font-size: 20px;">Happy</p>
+
+        <p style="font-size: 20px;">
+          {{prob[2]}}%
+        </p>
+      </div>
+      <div style="padding: 30px;background-color:rgba(184,222,255,1.0);border-radius: 10px;margin-right: 15px;">
+        <p style="font-size: 60px;">
+          😔
+        </p>
+        <p style="font-size: 20px;">Sad</p>
+
+        <p style="font-size: 20px;">
+          {{prob[3]}}%
+        </p>
+      </div>
+      <div style="padding: 30px;background-color:rgba(184,222,255,1.0);border-radius: 10px; margin-right: 15px;">
+        <p style="font-size: 60px;">
+          😯
+        </p>
+        <p style="font-size: 20px;">Surprise</p>
+
+        <p style="font-size: 20px;">
+          {{prob[4]}}%
+        </p>
+      </div>
+      <div style="padding: 30px;background-color:rgba(184,222,255,1.0);border-radius: 10px;">
+        <p style="font-size: 60px;">
+          😐
+        </p>
+        <p style="font-size: 20px;">Neutral</p>
+
+        <p style="font-size: 20px;">
+          {{prob[5]}}%
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <p style="margin-bottom: 10px;font-size: 20px;margin-top: 100px;">
+        Graphical Representation
+      </p>
+
+    </div>
+
+    <div style="display: flex;flex-direction: row;margin-top: 50px;justify-content: center;">
+      <div style="">
+        <div class="legend1">
+          <!-- <div class="legend1">
+            <p class="country-name"><span class="key-dot you"></span>You</p>
+          </div>
+          <div class="legend1">
+            <p class="country-name"><span class="key-dot others"></span>Other candidates</p>
+          </div> -->
+        </div>
+        <div id="audio_emotions_dist"></div>
+      </div>
+      <div style="">
+        <div>
+          <div id="audio_emotions_dist_other"></div>
+        </div>
+      </div>
+
+      
+    </div>
+  <span style="margin-right: 10px;"><span class="key-dot you"></span>You </span>
+      <span><span class="key-dot others"></span>Other candidates</span>
+
+
+    <!-- <div class="row">
+   <h2><i>Perceived emotions</i></h2>
+   <br>
+   <br>
+ 
+  <div class="column" id="left-col" align="center">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <p>Your most frequent emotion is : <b>{{emo}}</b></p>
+        <div class="parent">
+          <ul align="left">
+            <li>Angry    : {{prob[0]}}%</li>
+            <li>Disgust  : {{prob[1]}}%</li>
+            <li>Fear     : {{prob[2]}}%</li>
+            <li>Happy    : {{prob[3]}}%</li>
+            <li>Neutral  : {{prob[4]}}%</li>
+            <li>Sad      : {{prob[5]}}%</li>
+            <li>Surprise : {{prob[6]}}%</li>
+          </ul>
+        </div>
+      <br>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <hr width="50%" style="margin-left: 25%; margin-right:25%">
+  <br>
+  <br>
+
+  
+   <div class="column" id="left-col" align="center">
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+         <p>Other candidates most frequent emotion is : <b>{{emo_other}}</b></p>
+         <div class="parent">
+           <ul align="left">
+             <li>Angry    : {{prob_other[0]}}%</li>
+             <li>Disgust  : {{prob_other[1]}}%</li>
+             <li>Fear     : {{prob_other[2]}}%</li>
+             <li>Happy    : {{prob_other[3]}}%</li>
+             <li>Neutral  : {{prob_other[4]}}%</li>
+             <li>Sad      : {{prob_other[5]}}%</li>
+             <li>Surprise : {{prob_other[6]}}%</li>
+           </ul>
+         </div>
+       <br>
+     </div>
+  </div> -->
+
+    <script type="text/javascript" src="/static/js/hist_aud_perso.js"></script>
+    <script type="text/javascript" src="/static/js/hist_aud_glob.js"></script>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- <form>
+    <input type="button" value="Back" onclick="history.go(-1)">
+  </form> -->
+
+    {% endblock %}
+
+</body>
+
+</html>
