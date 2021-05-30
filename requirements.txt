@@ -8,7 +8,7 @@ tika
 nltk
 PyAudio
 librosa
-tensorflow
+tensorflow-cpu
 scikit-learn
 # Werkzeug
 # pandas
