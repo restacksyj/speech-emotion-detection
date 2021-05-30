@@ -23,7 +23,6 @@ numpy
 pandas
 opencv-python
 argparse
-collections
 scipy
 dlib
 tensorflow
