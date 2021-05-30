@@ -1,7 +1,6 @@
 Flask
 Gunicorn
 Werkzeug
-numpy
 pandas
 opencv-python
 cmake
