@@ -22,8 +22,6 @@ wordcloud
 numpy
 pandas
 opencv-python
-re
-os
 argparse
 collections
 scipy
