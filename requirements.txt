@@ -3,6 +3,9 @@ gunicorn
 pandas
 altair
 Flask
+requests
+tika
+nltk
 # Werkzeug
 # pandas
 # opencv-python
