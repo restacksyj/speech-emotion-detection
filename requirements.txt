@@ -25,5 +25,6 @@ argparse
 scipy
 tensorflow
 imutils
+gunicorn
 
 
