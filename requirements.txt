@@ -19,7 +19,7 @@ scikit-learn
 dill
 keras
 wordcloud
-numpy==1.19.5
+numpy
 pandas
 opencv-python
 argparse
