@@ -8,6 +8,8 @@ tika
 nltk
 PyAudio
 librosa
+tensorflow
+scikit-learn
 # Werkzeug
 # pandas
 # opencv-python
