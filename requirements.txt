@@ -1,6 +1,8 @@
 # Flask
 gunicorn
 pandas
+altair
+Flask
 # Werkzeug
 # pandas
 # opencv-python
