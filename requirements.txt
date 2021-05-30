@@ -10,7 +10,7 @@ PyAudio
 librosa
 tensorflow-cpu
 scikit-learn
-genism
+gensim
 Werkzeug
 scipy
 imutils
