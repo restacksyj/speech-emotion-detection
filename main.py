@@ -22,7 +22,7 @@ from library.speech_emotion_recognition import *
 ### Text imports ###
 from library.text_emotion_recognition import *
 from library.text_preprocessor import *
-from nltk import *
+# from nltk import *
 from tika import parser
 from werkzeug.utils import secure_filename
 import tempfile
