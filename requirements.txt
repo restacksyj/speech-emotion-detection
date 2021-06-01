@@ -18,6 +18,7 @@ seaborn
 wordcloud
 dill
 argparse
+python-Levenshtein
 # Werkzeug
 # pandas
 # opencv-python

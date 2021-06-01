@@ -200,9 +200,18 @@ input[type="button"] {
     cursor: default;
     font-size: 14px;
     font-weight: bold;
-    width: 100px;
+    /* width: 100px; */
     padding: 0 16px;
     height:50px;
+}
+.disabledBtn {
+  background: #dddddd;
+}
+
+.hide {
+   position: absolute !important;
+   top: -9999px !important;
+   left: -9999px !important;
 }
 
 input[type="button"]:hover {

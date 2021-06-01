@@ -23,9 +23,6 @@ Speech Emotion Recognition
 '''
 class speechEmotionRecognition:
 
-    '''
-    Voice recording function
-    '''
     def __init__(self, subdir_model=None):
 
         # Load prediction model
