@@ -146,7 +146,7 @@ def audio_dash():
 
     # Sleep
     time.sleep(0.5)
-    
+
     return render_template('audio_dash.html', emo=major_emotion, emo_other=major_emotion_other, prob=emotion_dist, prob_other=emotion_dist_other,emotion_rec=emotion_rec)
 
 
@@ -158,9 +158,9 @@ global df_text
 
 tempdirectory = tempfile.gettempdir()
 
-@app.route('/text', methods=['POST'])
-def text() :
-    return render_template('text.html')
+# @app.route('/text', methods=['POST'])
+# def text() :
+#     return render_template('text.html')
 
 # def get_personality(text):
 #     try:
