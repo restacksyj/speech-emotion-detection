@@ -62,25 +62,25 @@ def audio_index():
     return render_template('audio.html', display_button=False)
 
 # Audio Recording
-@app.route('/audio_recording', methods=("POST", "GET"))
-def audio_recording():
-
-    # Instanciate new SpeechEmotionRecognition object
-    data = request.form.get('audio_data', "default_name")
-    print("I am running")
-    print(data)
-    SER = speechEmotionRecognition()
-
-    # Voice Recording
-    rec_duration = 16 # in sec
-    rec_sub_dir = os.path.join('tmp','voice_recording.wav')
-    rec_html_dir = os.path.join('static/audios','voice_recording.wav')
-    SER.voice_recording(rec_sub_dir,rec_html_dir, duration=rec_duration)
-
-    # Send Flash message
-    flash("The recording is over! You now have the opportunity to do an analysis of your emotions. If you wish, you can also choose to record yourself again.")
-
-    return render_template('audio.html', display_button=True,audio=rec_html_dir)
+# @app.route('/audio_recording', methods=("POST", "GET"))
+# def audio_recording():
+#
+#     # Instanciate new SpeechEmotionRecognition object
+#     data = request.form.get('audio_data', "default_name")
+#     print("I am running")
+#     print(data)
+#     SER = speechEmotionRecognition()
+#
+#     # Voice Recording
+#     rec_duration = 16 # in sec
+#     rec_sub_dir = os.path.join('tmp','voice_recording.wav')
+#     rec_html_dir = os.path.join('static/audios','voice_recording.wav')
+#     SER.voice_recording(rec_sub_dir,rec_html_dir, duration=rec_duration)
+#
+#     # Send Flash message
+#     flash("The recording is over! You now have the opportunity to do an analysis of your emotions. If you wish, you can also choose to record yourself again.")
+#
+#     return render_template('audio.html', display_button=True,audio=rec_html_dir)
 
 
 # Audio Emotion Analysis

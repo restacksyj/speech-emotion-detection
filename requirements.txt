@@ -5,8 +5,6 @@ altair
 Flask
 requests
 tika
-nltk
-PyAudio
 librosa
 tensorflow-cpu
 scikit-learn
