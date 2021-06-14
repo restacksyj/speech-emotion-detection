@@ -31,7 +31,9 @@
       <br />
 
       <p style="font-size: 60px; margin-top: 120px; margin-bottom: 20px">
-        Speech Emotion Detection
+        <a href="/" class="a" style="text-decoration: none !important; color: black;">
+      Speech Emotion Detection
+      </a>
       </p>
       <p style="margin-bottom: 100px; font-size: 20px; font-weight: 200">
         Analysis of your emotion using Speech. Understand yourself!
@@ -51,6 +53,7 @@
       <form action="/audio_dash" method="POST" enctype="multipart/form-data">
         <!-- <input type="submit" name="audio_recorded" id="audio_recorded"/> -->
         <input
+
           type="button"
           id="record"
           name="record"
@@ -62,15 +65,16 @@
       <div style="margin: 10px"></div>
       <div style="margin: 0 auto;">
 
-        <div id="waveform" ></div>
+        <div id="waveform" sty]e="margin-left:20;margin-right:20" ></div>
         <button
         class="hide"
+        id="buttonPlay"
         data-action="play"
         disabled="disabled"
         style="
           text-decoration: none;
           padding: 10px;
-          
+
           background: #343b3f;
           color: #fff;
           border: none;
@@ -79,6 +83,22 @@
       >
         Play / Pause
       </button>
+        <button
+                class="hide"
+                 disabled="disabled"
+                data-action="reset"
+                style="
+          text-decoration: none;
+          padding: 10px;
+
+          background: #343b3f;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+        ">
+          Reset
+        </button>
+
       </div>
       
 

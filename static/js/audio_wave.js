@@ -6,46 +6,52 @@ window.onload = function () {
 
   const sleep = time => new Promise(resolve => setTimeout(resolve, time));
 
-  // let mainbtn = document.getElementById("mainbtn")
-
-  // mainbtn.addEventListener("click", () => {
-  //     hideEl.innerHTML = "Recording..."
-
-  //     setInterval(() => {
-  //         hideEl.innerHTML = ""
-  //         mainbtn.disabled = false
-  //     }, 16000)
-
-
-  // })
 
   URL = window.URL || window.webkitURL;
 
   var gumStream; 						//stream from getUserMedia()
   var rec; 							//Recorder.js object
-  var input; 							//MediaStreamAudioSourceNode we'll be recording
+  var input;
 
   // shim for AudioContext when it's not avb. 
   var AudioContext = window.AudioContext || window.webkitAudioContext;
   var audioContext //audio context to help us record
 
   var recordButton = document.getElementById("record");
+  var resetButton = document.querySelector('[data-action="reset"]');
+
+
+   resetButton.addEventListener('click', () => reset());
+
   const analysisButton = document.getElementById("analysis_button")
 
+      var wavesurfer = WaveSurfer.create({
+      audioContext: audioContext,
+      container: '#waveform',
+      waveColor: '#D9DCFF',
+      progressColor: '#4353FF',
+      cursorColor: '#4353FF',
+      barWidth: 3,
+      barRadius: 3,
+      cursorWidth: 1,
+      height: 200,
+      barGap: 3,
+    });
 
-  // var stopButton = document.getElementById("stopButton");
-  // var pauseButton = document.getElementById("pauseButton");
+
 
   //add events to those 2 buttons
   var timerInterval = null;
 
+
   function startTimer(time) {
-    formattedTime = time / 1000
+     time = time / 1000
     // Update input every second
     return setInterval(function () {
-      
-      hideEl.innerHTML = `Recording ends in ${--formattedTime} seconds...`;
-      if (formattedTime < 1) {
+
+      hideEl.innerHTML = `Recording ends in ${--time} seconds...`;
+      if (time < 1) {
+//        formattedTime=0
         clear();
       }
     }, 1000);
@@ -54,23 +60,35 @@ window.onload = function () {
   const clear = () => {
     clearInterval(timerInterval);
     hideEl.innerHTML = ""
+
+
   }
 
 
   const handleRec = async () => {
 
+    const buttonPlay = document.getElementById('buttonPlay');
+
     var recordButton = document.getElementById("record");
     recordButton.style.background ="rgba(15 ,15, 15,0.2)"
     recordButton.setAttribute("disabled","disabled");
+    recordButton.style.cursor = "not-allowed";
+    buttonPlay.setAttribute("disabled","disabled")
+    buttonPlay.classList.add("hide")
+    console.log("Was i called")
 
     startRecording();
     startTimer(15000)
     await sleep(16000)
     stopRecording();
-    recordButton.style.background = "#343b3f"
-    recordButton.removeAttribute("disabled");
+
+
     analysisButton.removeAttribute("disabled")
     analysisButton.classList.remove("hide")
+    buttonPlay.removeAttribute("disabled")
+    buttonPlay.classList.remove("hide")
+    resetButton.removeAttribute("disabled")
+    resetButton.classList.remove("hide")
 
   }
 
@@ -118,93 +136,32 @@ window.onload = function () {
 
   function stopRecording() {
     console.log("stopButton clicked");
-
-    // //disable the stop button, enable the record too allow for new recordings
-    // stopButton.disabled = true;
-    recordButton.disabled = false;
-    // pauseButton.disabled = true;
-
-    // //reset button just in case the recording is stopped while paused
-    // pauseButton.innerHTML = "Pause";
-
-    //tell the recorder to stop the recording
+//    recordButton.disabled = false;
     rec.stop();
-
-    //stop microphone access
     gumStream.getAudioTracks()[0].stop();
 
-
-    // var wavesurfer = WaveSurfer.create({
-    //   audioContext: audioContext,
-    //   container: '#waveform',
-    //   waveColor: '#D9DCFF',
-    //   progressColor: '#4353FF',
-    //   cursorColor: '#4353FF',
-    //   barWidth: 3,
-    //   barRadius: 3,
-    //   cursorWidth: 1,
-    //   height: 200,
-    //   barGap: 3
-    // });
-    // wavesurfer.load(`${url}`);
-
-    //create the wav blob and pass it on to createDownloadLink
     var blob = rec.exportWAV(uploadAudio)
 
-
-
-    //rec.exportWAV(createDownloadLink);
-    // var xhr = new XMLHttpRequest();
-    // xhr.onload = function (e) {
-    //   if (this.readyState === 4) {
-    //     console.log("Server returned: ", e.target.responseText);
-    //   }
-    // };
-    // var fd = new FormData();
-
-    // fd.append("record", blob, filename);
-    // xhr.open("POST", "/audio_dash", true);
-    // xhr.send(fd);
   }
 
   record.addEventListener("click", handleRec);
 
 
   const uploadAudio = (blob) => {
+
     var url = URL.createObjectURL(blob);
     var filename = new Date().toISOString();
-
-
-    var wavesurfer = WaveSurfer.create({
-      audioContext: audioContext,
-      container: '#waveform',
-      waveColor: '#D9DCFF',
-      progressColor: '#4353FF',
-      cursorColor: '#4353FF',
-      barWidth: 3,
-      barRadius: 3,
-      cursorWidth: 1,
-      height: 200,
-      barGap: 3,
-    });
     wavesurfer.load(`${url}`);
     const button = document.querySelector('[data-action="play"]');
-    button.removeAttribute("disabled")
-    button.classList.remove("hide")
+    buttonPlay.removeAttribute("disabled")
+    buttonPlay.classList.remove("hide")
 
     button.addEventListener('click', wavesurfer.playPause.bind(wavesurfer));
 
-    // var xhr = new XMLHttpRequest();
-    // xhr.onload = function (e) {
-    //   if (this.readyState === 4) {
-    //     console.log("Server returned: ", e.target.responseText);
-    //   }
-    // };
     var fd = new FormData();
 
     fd.append("record", blob, filename);
-    // xhr.open("POST", "/audio_dash", true);
-    // xhr.send(fd);
+
 
     fetch("/audio_dash", {
       method: "POST",
@@ -217,7 +174,24 @@ window.onload = function () {
       }
       console.log('Invalid status saving audio message: ' + res.status);
 
+
     });
+
+  }
+
+  function reset(){
+    wavesurfer.empty()
+    recordButton.style.background = "#343b3f"
+    recordButton.removeAttribute("disabled");
+    recordButton.style.cursor = "default"
+    analysisButton.setAttribute("disabled","disabled")
+    analysisButton.classList.add("hide")
+    buttonPlay.setAttribute("disabled","disabled")
+    buttonPlay.classList.add("hide")
+    buttonPlay.addEventListener("click",() => wavesurfer.playPause())
+    resetButton.classList.add("hide")
+    resetButton.setAttribute("disabled","disabled")
+
 
   }
 

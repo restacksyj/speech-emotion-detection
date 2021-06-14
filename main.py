@@ -34,6 +34,7 @@ port = int(os.environ.get("PORT", 5000))
 app = Flask(__name__)
 app.secret_key = b'(\xee\x00\xd4\xce"\xcf\xe8@\r\xde\xfc\xbdJ\x08W'
 app.config['UPLOAD_FOLDER'] = '/Upload'
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -349,4 +350,5 @@ def preprocess_text(text):
 #     return render_template('text_dash.html', traits = probas, trait = trait, trait_others = trait_others, probas_others = probas_others, num_words = num_words, common_words = common_words_perso, common_words_others=common_words_others)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port, debug=True)
+    # app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(debug=True)
