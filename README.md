@@ -33,18 +33,10 @@ The app is deployed on Heroku.
 
   
 ## Screenshots
-
-<img src="https://github.com/restacksyj/speech-emotion-detection/blob/master/screenshots/homepage.png" width="360" height="360">
-<img src="https://github.com/restacksyj/speech-emotion-detection/blob/master/screenshots/recording.png" width="360" height="360">
-<img src="https://github.com/restacksyj/speech-emotion-detection/blob/master/screenshots/recorded.png" width="360" height="360">
-<img src="https://github.com/restacksyj/speech-emotion-detection/blob/master/screenshots/final_analysis.png" width="360" height="360">
  
 
-[comment]: <> (![Homepage]&#40;screenshots/homepage.png&#41;)
-
-[comment]: <> (![Recording]&#40;screenshots/recording.png&#41;)
-
-[comment]: <> (![Homepage]&#40;screenshots/recorded.png&#41;)
-
-[comment]: <> (![Homepage]&#40;screenshots/final_analysis.png&#41;)
+![Homepage](screenshots/homepage.png)
+![Recording](screenshots/recording.png)
+![Homepage](screenshots/recorded.png)
+![Homepage](screenshots/final_analysis.png)
   
